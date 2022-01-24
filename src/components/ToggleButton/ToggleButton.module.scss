@@ -1,0 +1,35 @@
+.btn {
+	height: 100%;
+	padding: 0;
+
+	cursor: pointer;
+
+	border: none;
+	border-top: 1px solid var(--gray-light);
+	border-right: 1px solid var(--gray-light);
+	border-bottom: 1px solid var(--gray-light);
+	background: none;
+
+	&:last-child {
+		border-radius: 0 5px 5px 0;
+	}
+
+	&:first-child {
+		border-left: 1px solid var(--gray-light);
+		border-radius: 5px 0 0 5px;
+	}
+
+	&:hover {
+		background: var(--blue-light);
+	}
+}
+
+.active {
+	color: var(--white);
+	border: none;
+	background: var(--primary);
+
+	&:hover {
+		background: #1385E2;
+	}
+}

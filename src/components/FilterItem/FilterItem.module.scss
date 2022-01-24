@@ -1,0 +1,41 @@
+.filter_item {
+	display: flex;
+
+	padding: 10px 20px;
+
+	cursor: pointer;
+
+	border: none;
+	background: none;
+	gap: 10px;
+
+	&:hover {
+		background: var(--blue-light);
+	}
+}
+
+.checkbox {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+
+	box-sizing: border-box;
+
+	width: 20px;
+	height: 20px;
+
+	border: 1px solid #9ABBCE;
+	border-radius: 2px;
+
+	& svg {
+		display: none;
+	}
+}
+
+.active {
+	border: 1px solid var(--primary);
+
+	& svg {
+		display: block;
+	}
+}

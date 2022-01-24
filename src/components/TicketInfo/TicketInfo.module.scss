@@ -1,0 +1,18 @@
+.info {
+	font-weight: 600;
+
+	&_title {
+		letter-spacing: 0.5px;
+		text-transform: uppercase;
+
+		color: var(--gray);
+
+		font-size: 12px;
+		line-height: 18px;
+	}
+
+	&_block {
+		font-size: 14px;
+		line-height: 21px;
+	}
+}
