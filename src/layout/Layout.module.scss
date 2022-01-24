@@ -1,29 +1,30 @@
 .layout {
-	display: grid;
-	grid-template-columns: auto 232px 502px auto;
-	grid-template-rows: 140px 50px 182px 1fr;
-	gap: 20px;
-	grid-template-areas:
-		". header header . "
-		". filter sort ."
-		". filter body ."
-		". . body .";
+  display: grid;
+  grid-template-columns: auto 232px 502px auto;
+  grid-template-rows: 140px 50px 182px 1fr;
+  gap: 20px;
+  grid-template-areas:
+    ". header header . "
+    ". filter sort ."
+    ". filter body ."
+    ". . body .";
 
-	height: 100vh;
+  min-height: 100vh;
 }
 
 .header {
-	grid-area: header;
+  grid-area: header;
 }
 
 .filter {
-	grid-area: filter;
+  grid-area: filter;
 }
 
 .body {
-	grid-area: body;
+  grid-area: body;
+  margin-bottom: 50px;
 }
 
 .sort {
-	grid-area: sort;
+  grid-area: sort;
 }

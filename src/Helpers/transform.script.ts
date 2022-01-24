@@ -47,6 +47,7 @@ export const transformTickets = (tickets:Ticket[]):TicketData[] => {
 		return(
 			{
 				price: t.price,
+				carrier: t.carrier,
 				duration: t.segments[0].duration + t.segments[1].duration,
 				stops: [t.segments[0].stops.length, t.segments[1].stops.length],
 				to: {

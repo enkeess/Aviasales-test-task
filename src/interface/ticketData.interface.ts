@@ -10,4 +10,5 @@ export interface TicketData {
 	fromDuration: InfoPair;
 	toStops: InfoPair;
 	fromStops: InfoPair;
+	carrier: string;
 }
