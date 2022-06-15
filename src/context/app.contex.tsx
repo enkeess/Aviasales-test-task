@@ -3,22 +3,37 @@ import { SortType } from '../enums/sortType.enum';
 import { TransferTypes } from '../enums/transferTypes.enum';
 import { transformTickets } from '../Helpers/transform.script';
 import { TicketData } from '../interface/ticketData.interface';
+import FakeApi from '../service/fakeApi';
 
 
 export interface IAppContext {
 	selected: boolean[];
 	sort: SortType;
 	tickets: TicketData[];
+	isError?: boolean;
 	updateSelectedTransferType?: (t:TransferTypes) => void;
 	updateSort?: (t : SortType) => void;
-	updateTickets?: (searchId: string) => void;
+	updateTickets?: () => void;
 }
 
-export const AppContext = createContext<IAppContext>({ selected: [false, false, false, false, false], sort: SortType.CHEAP, tickets: []});
+export const initialStore = {
+	selected: [true, true, true, true, true], 
+	sort: SortType.CHEAP, 
+	tickets: []
+};
+
+export const AppContext = createContext<IAppContext>(initialStore);
 
 export const AppContextProvider = ({ selected, sort, children }: PropsWithChildren<IAppContext>): JSX.Element => {
 	const [selectedTransferType, setSelectedTransferType] = useState<boolean[]>(selected);
 	
+	const fakeApi = new FakeApi();
+
+	const [isError, setIsErorr] = useState<boolean>(false);
+	const [isStop, setIsStop] = useState<boolean>(false);
+	const [ticks, setTicks] = useState<TicketData[]>([]);
+	const [sortState, setSort] = useState<SortType>(sort);
+
 	const updateSelectedTransferType = (t: TransferTypes) => {
 		let newSelectedTransferType:boolean[] = [...selectedTransferType];
 
@@ -36,52 +51,32 @@ export const AppContextProvider = ({ selected, sort, children }: PropsWithChildr
 		setSelectedTransferType(newSelectedTransferType);
 	};
 
-	const [sortState, setSort] = useState<SortType>(sort);
-
 	const updateSort = (t : SortType) => {
 		setSort(t);
 	};
 
-	const updateTickets = async (searchId : string) => {
+	const updateTickets = async () => {
+
+		setIsStop(false);
+		setIsErorr(false);
 
 		let newTicks:TicketData[] = [];
-		let response = new Response();
-		let myStop = false;
-		
-		do {
-			response = await 
-			fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`);
-			
-			if(!response.ok) {
-				switch(response.status) {
-					case(404): {
-						console.log(`Server error: ${response.status}`);
-						myStop = true;
-						return;
-					}
-					case(500): {
-						console.log(`Server error: ${response.status}`);
-						continue;
-					}
-				}
-				
-			} else {
-				const res = await response.json();
 
-				[...newTicks] = [...newTicks, ...transformTickets(res.tickets)];
-				myStop = res.stop;
-				
-					
-			}
-		} while(!myStop);
+		await fakeApi.getTickets()
+			.then(({tickets, stop}) => {
+				newTicks = transformTickets(tickets);
+				setIsStop(stop);
+			})
+			.catch(err => {
+				setIsErorr(true);
+				console.log(err);
+			});
 		
 		setTicks(newTicks);
-
 	};
 
-	const [ticks, setTicks] = useState<TicketData[]>([]);
 
-	return <AppContext.Provider value={{updateTickets, selected: selectedTransferType, sort:sortState, updateSelectedTransferType, updateSort, tickets:ticks}}>
+	return <AppContext.Provider value={{updateTickets, selected: selectedTransferType, sort:sortState, updateSelectedTransferType, updateSort, tickets:ticks, isError:isError}}>
 		{children}
 	</AppContext.Provider>;
 };

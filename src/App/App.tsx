@@ -5,35 +5,48 @@ import { AppContext } from '../context/app.contex';
 
 import styles from './App.module.scss';
 
+const step = 2;
+
 export const App = ():JSX.Element => {
-	const [searchId, setSearchId] = useState<string>("");
-	const {updateTickets} = useContext(AppContext);
-	
-	const getId = async () => {
-	const res = await fetch('https://front-test.beta.aviasales.ru/search')
-		.then(res=>res.json());
-		setSearchId(res.searchId);
-	};
+	const { updateTickets, tickets, isError } = useContext(AppContext);
 	
 	useEffect(() => {
-		getId();
+		updateTickets && updateTickets();
 	}, []);
 
-	useEffect(() => {
-		updateTickets && updateTickets(searchId);
-	}, [searchId]);
+	const [showBtn, setShowBtn] = useState<boolean>(true);
 
-	const [num, setNum] = useState<number>(5);
+	const [num, setNum] = useState<number>(step);
   
 	const updateNum = ()=> {
-		const newNum = num + 5;
+		const newNum = num + step;
 		setNum(newNum);
+
+		if(tickets.length < newNum) {
+			setShowBtn(false);
+		}
+	};
+
+	const reload = () => {
+		setNum(step);
+		setShowBtn(true);
+		updateTickets && updateTickets();
 	};
 
   return (
     <div className={styles.app}>
-		<TicketList num={num}/>
-		<LoadBtn updateNum={updateNum}>Показать еще 5 билетов!</LoadBtn>
+		{ !isError &&  <>
+			<TicketList num={num}/>
+			{ showBtn && <LoadBtn onClick={updateNum}>Показать еще {step} билетов!</LoadBtn> }
+		</>  }
+
+
+		{isError && <>
+				<p>Ошибка сервера. Не удалось загрузить билеты... </p>
+				<LoadBtn onClick={reload}>Попробовать еще раз!</LoadBtn>
+		</> }
+
+
     </div>
   );
 };
