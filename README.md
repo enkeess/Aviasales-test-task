@@ -1,12 +1,12 @@
-# Тестовое задание Aviasales (frontend)
+# Тестовое задание Aviasales
 
-## Условия
+## Технические требования
 
-- Используй React
-- Используй TS или JS
-- Работоспособность в актуальной версии Google Chrome
-- Остальное на твоё усмотрение
+- Приложение разработано с использованием `React`, `TypeScript`, `ContextAPI`, `eslint`, `stylelint`
+- Отображение индикатора загрузки, обработка ошибок сервера
+- Пакетный менеджер `npm`. Устанавливаются необходимые пакеты командой `npm install`
+- Приложение должно запускаться по адресу `localhost:3000` командой `npm start`
 
-## Макет (Figma)
+## Внешний вид приложения
+<img width="800" alt="preview" src="https://user-images.githubusercontent.com/37826099/173839056-07f0054a-a1eb-445b-a49b-12f65149011b.png">
 
-https://github.com/KosyanMedia/test-tasks/raw/f0f60244b045928746188a86ba4f76ddb5515111/aviasales_frontend/Aviasales%20Test%20Task.fig
