@@ -1,5 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes} from 'react';
-
-export interface TicketListProps extends DetailedHTMLProps< HTMLAttributes <HTMLDivElement>,  HTMLDivElement>{
-	num:number;
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { ITicketTransformed } from 'src/models/ITicketTransformed';
+export interface TicketListProps
+    extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+    tickets: ITicketTransformed[] | undefined;
 }

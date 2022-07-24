@@ -1,26 +1,31 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "module": "ESNext",
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/helpers/*": ["src/helpers/*"],
+            "@/types/*": ["src/types/*"],
+            "@/components/*": ["src/components/*"],
+            "@/services/*": ["src/services/*"],
+            "@/constants/*": ["src/constants/*"],
+            "@/hooks/*": ["src/hooks/*"],
+            "@/assets/*": ["src/assets/*"]
+        }
+    },
+    "include": ["**/*.ts", "**/*.tsx", "declaration.d.ts"],
+    "exclude": ["node_modules"]
 }

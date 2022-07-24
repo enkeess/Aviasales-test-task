@@ -1,20 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/globals.scss';
-import {App} from './App/App';
-import { Layout } from './layout/Layout';
-import { AppContextProvider, initialStore } from './context/app.contex';
-
+import './scss/globals.scss';
+import { App } from './App/App';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 ReactDOM.render(
-  <React.StrictMode>
-		<AppContextProvider 
-			{...initialStore}
-		>
-			<Layout>
-				<App />
-			</Layout>
-		</AppContextProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    //   <React.StrictMode>
+    <ErrorBoundary>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </ErrorBoundary>,
+    //   </React.StrictMode>,
+    document.getElementById('root')
 );
