@@ -1,4 +1,4 @@
-# noAviasales
+# no-aviasales
 
 ## Stack
 
@@ -8,8 +8,8 @@
 ## Install
 
 ```sh
-	git clone https://github.com/enkeess/Aviasales-test-task
-	cd Aviasales-test-task
+	git clone https://github.com/enkeess/no-aviasales/
+	cd no-aviasales
 	npm i
 ```
 
